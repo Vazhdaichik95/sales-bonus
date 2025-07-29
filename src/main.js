@@ -17,6 +17,14 @@ function calculateSimpleRevenue(purchase, _product) {
  */
 function calculateBonusByProfit(index, total, seller) {
     // @TODO: Расчет бонуса от позиции в рейтинге
+    const {profit} = seller;
+    if (index===0){
+        profit+=profit*0.15;
+    } else if(index===1||index===2) {
+        profit+=profit*0.1;
+    } else if(index>2&&index<total-2) {
+        profit+=profit*0.05;
+    }
 }
 
 /**
@@ -27,6 +35,14 @@ function calculateBonusByProfit(index, total, seller) {
  */
 function analyzeSalesData(data, options) {
     // @TODO: Проверка входных данных
+    const condition1 = !Array.isArray(data.sellers)&&!Array.isArray(data.products)&&!Array.isArray(data.customers);
+    const condition2 = data.sellers.length===0&&data.products.length===0&&data.customers.length===0;
+
+    if (!data || condition1 || condition2){
+        throw new Error('Некорректные входные данные');
+    }
+
+    const {calculateREvenue, calculateBonus} = options;
 
     // @TODO: Проверка наличия опций
 
