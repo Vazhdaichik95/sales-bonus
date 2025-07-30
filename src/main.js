@@ -43,13 +43,12 @@ function calculateBonusByProfit(index, total, seller) {
 function analyzeSalesData(data, options) {
     // @TODO: Проверка входных данных
     const condition1 = !Array.isArray(data.sellers)
-                        &&!Array.isArray(data.products)
-                        &&!Array.isArray(data.customers)
-                        &&!Array.isArray(data.purchase_records);
-    const condition2 = data.sellers.length===0
-                        &&data.products.length===0
-                        &&data.customers.length===0
-                        &&data.purchase_records.length===0;
+                        ||!Array.isArray(data.products)
+                        ||!Array.isArray(data.customers)
+                        ||!Array.isArray(data.purchase_records);
+    const condition2 = data.purchase_records.length===0||data.sellers.length===0
+                        ||data.products.length===0
+                        ||data.customers.length===0;
 
     if (!data 
         || condition1 
