@@ -49,7 +49,7 @@ function analyzeSalesData(data, options) {
     const condition2 = data.sellers.length===0
                         &&data.products.length===0
                         &&data.customers.length===0
-                        &&data.purchase_records===0;
+                        &&data.purchase_records.length===0;
 
     if (!data 
         || condition1 
@@ -89,6 +89,7 @@ function analyzeSalesData(data, options) {
             const cost = product.purchase_price*item.quantity;
             const revenue = calculateRevenue(item);
             seller.revenue+=revenue;
+            seller.revenue = +seller.revenue.toFixed(2);
             seller.profit+=revenue-cost;
             if(!seller.products_sold[item.sku]) {
                 seller.products_sold[item.sku] = 0;
